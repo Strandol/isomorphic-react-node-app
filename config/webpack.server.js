@@ -5,6 +5,7 @@ const nodeExternals = require('webpack-node-externals');
 const serverConfig = {
   entry: path.join(__dirname, '../src/server/index.js'),
   target: 'node',
+  devtool: 'source-map',
   externals: [nodeExternals()],
   output: {
     path: path.join(__dirname, '../build'),
@@ -13,13 +14,11 @@ const serverConfig = {
   },
   module: {
     rules: [
-      { test: /\.(js)$/, use: 'babel-loader' },
+      { test: /\.(js)$/, use: 'babel-loader', exclude: /node_modules/ },
     ]
   },
   plugins: [
-    new webpack.DefinePlugin({
-      __isBrowser__: 'false',
-    }),
+    new webpack.DefinePlugin({ __CLIENT__: false, __SERVER__: true, __PRODUCTION__: true, __DEV__: false }),
   ],
 };
 

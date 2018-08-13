@@ -9,14 +9,16 @@ import App from '../client/App';
 
 const app = express();
 app.use(cors());
-app.use(express.static('public'));
+// app.use(express.static('public'));
 
 app.get('*', (req, res) => {
-	const markup = renderToString(
-		<App />
-	);
+  console.log("Some request111...");
+  
+	// const markup = renderToString(
+	// 	<App />
+	// );
 
-	res.send(template({}, markup, 'Isomorphic express react app'));
+	res.send("Hello world!!");
 });
 
 app.listen(PORT, () => {
