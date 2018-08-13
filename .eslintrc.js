@@ -1,56 +1,50 @@
 module.exports = {
-	"env": {
-		"browser": true,
-		"node": true,
-		"es6": true
-	},
-	"parserOptions": {
-		"ecmaFeatures": {
-			"arrowFunctions": true,
-			"blockBindings": true,
-			"classes": true,
-			"defaultParams": true,
-			"destructuring": true,
-			"forOf": true,
-			"generators": false,
-			"modules": true,
-			"objectLiteralComputedProperties": true,
-			"objectLiteralDuplicateProperties": false,
-			"objectLiteralShorthandMethods": true,
-			"objectLiteralShorthandProperties": true,
-			"restParams": true,
-			"spread": true,
-			"superInFunctions": true,
-			"templateStrings": true,
-			"jsx": true
-		},
-		"ecmaVersion": 2018,
-		"sourceType": "module"
-	},
-	"plugins": [
-		"react"
-	],
-	"rules": {
-		"indent": [
-			"error",
-			"tab"
-		],
-		"linebreak-style": [
-			"error",
-			"windows"
-		],
-		"quotes": [
-			"error",
-			"single"
-		],
-		"semi": [
-			"error",
-			"always"
-		],
-		"no-unused-vars": 2,
-		"react/jsx-no-undef": 1,
-		"react/jsx-uses-react": 1,
-		"react/jsx-uses-vars": 1,
-		"react/react-in-jsx-scope": 1
-	}
-};
+  "parser": "babel-eslint",
+    "plugins": [
+      "react"
+    ],
+      "env": {
+    "browser": true,
+      "node": true,
+        "es6": true
+  },
+  "rules": {
+    "jsx-a11y/href-no-hash": "off",
+      "jsx-a11y/anchor-is-valid": ["warn", { "aspects": ["invalidHref"] }],
+        "no-unused-vars": [
+          "error",
+          {
+            "vars": "all",
+            "args": "none",
+            "ignoreRestSiblings": false
+          }
+        ],
+          "no-console": [
+            "warn",
+            {
+              "allow": [
+                "warn",
+                "error"
+              ]
+            }
+          ],
+            "strict": 0,
+              "semi": [
+                "error",
+                "always"
+              ],
+                "quotes": [
+                  "error",
+                  "single"
+                ],
+                  "multiline-ternary": [
+                    "error",
+                    "always-multiline"
+                  ]
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "react-app"
+  ]
+}
