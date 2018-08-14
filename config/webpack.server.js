@@ -22,6 +22,7 @@ const serverConfig = {
     new CleanWebpackPlugin(['build'], {
       root: path.join(__dirname, '..'),
       exclude: ['server.js', 'bundle.js', 'index.html'],
+      verbose: false
     })
   ],
   stats: 'errors-only'
