@@ -7,6 +7,6 @@ const modified = {
     ...config.plugins,
     new webpack.HotModuleReplacementPlugin(),
   ]
-}
+};
 
 module.exports = modified;
