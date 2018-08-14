@@ -5,5 +5,6 @@ import App from './App';
 describe('App', () => {
   it('should render', () => {
     shallow(<App/>);
+    expect(2).toEqual(5);
   });
 });
