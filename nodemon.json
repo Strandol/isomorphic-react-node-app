@@ -1,6 +1,7 @@
 {
-  "verbose": true,
-  "ignore": [
-    "node_modules"
+  "verbose": false,
+  "watch": [
+    "build",
+    "src/server"
   ]
 }

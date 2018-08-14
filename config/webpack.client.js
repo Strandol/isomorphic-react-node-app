@@ -1,11 +1,9 @@
 const path = require('path');
-const webpack = require('webpack');
-const HtmlWebPackPlugin = require('html-webpack-plugin');
 
 const clientConfig = {
   entry: path.join(__dirname, '../src/client/index.js'),
   output: {
-    path: path.join(__dirname, '../public'),
+    path: path.join(__dirname, '../build'),
     filename: 'bundle.js',
     publicPath: '/',
   },
@@ -14,15 +12,19 @@ const clientConfig = {
       { test: /\.(js)$/, use: 'babel-loader', exclude: /node_modules/ },
     ]
   },
-  plugins: [
-    new HtmlWebPackPlugin({
-      template: path.join(__dirname, '../assets/index.html'),
-      filename: './index.html'
-    })
-  ],
   optimization: {
     minimize: true,
     occurrenceOrder: true
+  },
+  stats: {
+    entrypoints: false,
+    assets: false,
+    builtAt: false,
+    chunks: false,
+    chunkModules: false,
+    modules: false,
+    usedExports: false,
+    reasons: false
   }
 };
 

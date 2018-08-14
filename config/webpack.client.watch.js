@@ -1,13 +1,12 @@
 const webpack = require('webpack');
 const config = require('./webpack.client');
 const path = require('path');
-// config.output.publicPath = config.devServer.publicPath;
 
 const modified = {
   ...config,
   devtool: "cheap-module-eval-source-map",
   devServer: {
-    contentBase: path.join(__dirname, '../public'),
+    contentBase: path.join(__dirname, '../static'),
     hot: true,
     open: true,
     stats: { colors: true },
