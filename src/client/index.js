@@ -1,12 +1,13 @@
 import React from 'react';
-import { hydrate } from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
-import App from './App';
+import { hydrate, render } from 'react-dom';
+import Root from './components/Root';
 
-hydrate(
-	<BrowserRouter>
-		<App/>
-	</BrowserRouter>,
+import 'semantic-ui-css/semantic.min.css';
+
+const renderFunc = module.hot ? render : hydrate;
+
+renderFunc(
+  <Root/>,
 	document.getElementById('app')
 );
 
