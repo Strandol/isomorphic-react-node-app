@@ -6,7 +6,7 @@ import { StaticRouter as Router, matchPath } from 'react-router';
 import template from './template';
 import { PORT } from './config';
 
-import App from '../client/App';
+import App from 'client/App';
 
 const routes = [
   '/'

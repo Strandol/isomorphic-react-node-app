@@ -17,6 +17,11 @@ const serverConfig = {
       { test: /\.(js)$/, use: 'babel-loader', exclude: /node_modules/ },
     ]
   },
+  resolve: {
+    alias: {
+      client: path.join(__dirname, '../src/client')
+    }
+  },
   plugins: [
     new webpack.DefinePlugin({ __CLIENT__: false, __SERVER__: true, __PRODUCTION__: true, __DEV__: false }),
     new CleanWebpackPlugin(['build'], {

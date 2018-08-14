@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 class App extends Component {
 	render() {
 		return (
-			<div>Hello fighter111!!!!!!</div>
+			<div>Hello fighter!!!</div>
 		);
 	}
 }
