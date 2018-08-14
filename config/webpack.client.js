@@ -1,35 +1,30 @@
 const path = require('path');
-const webpack = require('webpack');
-const HtmlWebPackPlugin = require('html-webpack-plugin');
 
 const clientConfig = {
   entry: path.join(__dirname, '../src/client/index.js'),
   output: {
-    path: path.join(__dirname, '../public'),
+    path: path.join(__dirname, '../build'),
     filename: 'bundle.js',
     publicPath: '/',
   },
   module: {
     rules: [
-      { test: /\.(js)$/, use: 'babel-loader' },
+      { test: /\.(js)$/, use: 'babel-loader', exclude: /node_modules/ },
     ]
   },
-  plugins: [
-    new webpack.DefinePlugin({
-      __isBrowser__: 'true',
-    }),
-  ],
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new HtmlWebPackPlugin({
-      template: path.join(__dirname, '../assets/index.html'),
-      filename: './index.html'
-    })
-  ],
-  devServer: {
-    contentBase: path.join(__dirname, './public'),
-    hot: true,
-    open: true
+  optimization: {
+    minimize: true,
+    occurrenceOrder: true
+  },
+  stats: {
+    entrypoints: false,
+    assets: false,
+    builtAt: false,
+    chunks: false,
+    chunkModules: false,
+    modules: false,
+    usedExports: false,
+    reasons: false
   }
 };
 
