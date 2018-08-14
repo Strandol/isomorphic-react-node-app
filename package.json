@@ -34,7 +34,7 @@
     "watch:server": "webpack --watch --config ./config/webpack.server.watch.js",
     "start:server": "just-wait --pattern \"build/*.js\" && nodemon ./build/server.js",
     "watch:client": "webpack --watch --config ./config/webpack.client.js --mode development",
-    "start:all": "concurrently --kill-others \"npm run watch:server\" \"npm run start:server\" \"npm run watch:client\""
+    "start": "concurrently --kill-others \"npm run watch:server\" \"npm run start:server\" \"npm run watch:client\""
   },
   "author": "strandol",
   "license": "ISC"
