@@ -3,5 +3,6 @@
   "watch": [
     "build",
     "src/server"
-  ]
+  ],
+  "delay": 2000
 }
