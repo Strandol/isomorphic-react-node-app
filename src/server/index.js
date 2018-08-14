@@ -21,17 +21,17 @@ app.get('*', (req, res) => {
   const match = routes.reduce((acc, route) => matchPath(req.url, route, { exact: true }) || acc, null);
   
   if (!match) {
-    res.status(404).send("Error 404");
+    res.status(404).send('Error 404');
     return;
   }
 
 	const markup = renderToString(
     <Router context={{}} location={req.url}>
-		  <App />
+      <App />
     </Router>
 	);
 
-	res.send(template({}, markup, "Isomorphic application"));
+	res.send(template({}, markup, 'Isomorphic application'));
 });
 
 app.listen(PORT, () => {
