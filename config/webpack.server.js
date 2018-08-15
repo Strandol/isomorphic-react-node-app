@@ -23,7 +23,7 @@ const serverConfig = {
     }
   },
   plugins: [
-    new webpack.DefinePlugin({ __CLIENT__: false, __SERVER__: true, __PRODUCTION__: true, __DEV__: false }),
+    new webpack.DefinePlugin({ __CLIENT__: false, __SERVER__: true, __PRODUCTION__: false, __DEV__: true }),
     new CleanWebpackPlugin(['build'], {
       root: path.join(__dirname, '..'),
       exclude: ['server.js', 'bundle.js', 'index.html'],
