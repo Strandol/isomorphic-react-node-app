@@ -56,17 +56,14 @@
     "start:server": "just-wait --pattern \"build/*.js\" && nodemon ./build/server.js",
     "watch:client": "webpack --watch --config ./config/webpack.client.js --mode development",
     "start:client": "webpack-dev-server --config ./config/webpack.client.watch.js --mode development",
-    "start": "concurrently --kill-others \"npm run watch:server\" \"npm run start:server\" \"npm run watch:client\""
+    "start": "concurrently --kill-others \"npm run watch:server\" \"npm run start:server\" \"npm run watch:client\"",
+    "lint": "eslint src/**/*.js --ignore-pattern *.test.js",
+    "precommit": "npm run lint"
   },
   "jest": {
     "setupFiles": [
       "<rootDir>/src/jest.config.js"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "eslint"
-    }
   },
   "author": "strandol",
   "license": "ISC"
