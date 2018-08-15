@@ -3,13 +3,14 @@ import cors from 'cors';
 import express from 'express';
 import morgan from 'morgan';
 import passport from 'passport';
+import { Strategy as JWTStrategy, ExtractJwt } from 'passport-jwt';
 import { Strategy as LocalStrategy } from 'passport-local';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter as Router, matchPath } from 'react-router';
 import api from './api';
 import template from './template';
-import { PORT } from './config';
+import { PORT, SECRET_KEY } from './config';
 
 import App from 'client/components/App';
 
@@ -25,14 +26,13 @@ passport.use(new LocalStrategy((username, password, cb) => {
 
   return cb(null, user);
 }));
-passport.serializeUser((user, cb) => cb(null, user.id));
-passport.deserializeUser((id, cb) => {
-  const user = users.find(u => u.id === id);
 
-  if (!user) return cb(new Error('No user with such id!'));
-
-  cb(null, user);
-});
+passport.use(new JWTStrategy({
+  secretOrKey: SECRET_KEY,
+  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken()
+}, (token, done) => {
+  return done(null, token.user);
+}));
 
 const routes = [
   '/'
@@ -51,11 +51,6 @@ app.use('/api', api);
 
 app.get('*', (req, res) => {
   const match = routes.reduce((acc, route) => matchPath(req.url, route, { exact: true }) || acc, null);
-
-  console.log('====================================');
-  console.log(req.url);
-  console.log(match);
-  console.log('====================================');
   
   if (!match) {
     res.status(404).send('Error 404');
