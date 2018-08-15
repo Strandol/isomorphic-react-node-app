@@ -62,6 +62,11 @@
       "<rootDir>/src/jest.config.js"
     ]
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "eslint"
+    }
+  },
   "author": "strandol",
   "license": "ISC"
 }
