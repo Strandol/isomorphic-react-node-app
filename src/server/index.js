@@ -31,7 +31,7 @@ app.get('*', (req, res) => {
     </Router>
 	);
 
-	res.send(template({}, markup, 'Isomorphic application'));
+	res.send(template({}, markup, 'Isomorphic app'));
 });
 
 app.listen(PORT, () => {
