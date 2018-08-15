@@ -1,6 +1,8 @@
 import bodyParser from 'body-parser';
 import cors from 'cors';
+import fs from 'fs';
 import express from 'express';
+import https from 'https';
 import morgan from 'morgan';
 import passport from 'passport';
 import { Strategy as JWTStrategy, ExtractJwt } from 'passport-jwt';
@@ -13,6 +15,14 @@ import template from './template';
 import { PORT, SECRET_KEY } from './config';
 
 import App from 'client/components/App';
+
+const privateKey = fs.readFileSync('./keys/server.key', 'utf8');
+const certificate = fs.readFileSync('./keys/server.cert', 'utf8');
+
+const https_credentials = {
+  key: privateKey,
+  cert: certificate
+};
 
 // temp stub
 const users = [
@@ -66,6 +76,7 @@ app.get('*', (req, res) => {
 	res.send(template({}, markup, 'Isomorphic app'));
 });
 
-app.listen(PORT, () => {
-	console.log(`Server is listening on port ${PORT}`);
+const httpsServer = https.createServer(https_credentials, app);
+httpsServer.listen(PORT, () => {
+  console.log(`Server is listening on port ${PORT}`);
 });
