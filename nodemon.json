@@ -4,5 +4,5 @@
     "build",
     "src/server"
   ],
-  "delay": 2000
+  "delay": 1500
 }
