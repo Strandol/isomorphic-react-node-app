@@ -4,7 +4,7 @@ const nodeExternals = require('webpack-node-externals');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const serverConfig = {
-  entry: path.join(__dirname, '../src/server/index.js'),
+	entry: ['babel-polyfill', path.join(__dirname, '../src/server/index.js')],
   target: 'node',
   externals: [nodeExternals()],
   output: {

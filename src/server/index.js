@@ -1,18 +1,20 @@
+// import 'babel-polyfill';
+
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import fs from 'fs';
 import express from 'express';
 import https from 'https';
+import mongoose from 'mongoose';
 import morgan from 'morgan';
 import passport from 'passport';
-import { Strategy as JWTStrategy, ExtractJwt } from 'passport-jwt';
-import { Strategy as LocalStrategy } from 'passport-local';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter as Router, matchPath } from 'react-router';
 import api from './api';
 import template from './template';
-import { PORT, SECRET_KEY } from './config';
+import { PORT, DB_PATH } from './config';
+import configPassport from './configPassport';
 
 import App from 'client/components/App';
 
@@ -24,25 +26,10 @@ const https_credentials = {
   cert: certificate
 };
 
-// temp stub
-const users = [
-  { id: 'd55aq11', username: 'strandol', password: '123456' }
-]; 
-
-passport.use(new LocalStrategy((username, password, cb) => {
-  const user = users.find(u => u.username === username);
-
-  if (!user || user.password !== password) return cb(null, false);
-
-  return cb(null, user);
-}));
-
-passport.use(new JWTStrategy({
-  secretOrKey: SECRET_KEY,
-  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken()
-}, (token, done) => {
-  return done(null, token.user);
-}));
+mongoose.connect(DB_PATH, err => {
+	if (err) console.log(err);
+	console.log('Connected to mongodb.');
+});
 
 const routes = [
   '/'
@@ -50,8 +37,10 @@ const routes = [
 
 const app = express();
 
-app.use(cors());
+configPassport();
+
 app.use(express.static('build'));
+app.use(cors());
 app.use(morgan(__DEV__ ? 'dev' : 'short'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
